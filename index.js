@@ -29,18 +29,18 @@ bot.on('message', (msg) => {
 	console.log('new', msg);
 
 	if (msg.text.match(/‼️/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/ntts0sjEqNaRG.gif');
+		bot.sendVideo(chatId, 'http://i.giphy.com/ntts0sjEqNaRG.gif', {reply_to_message_id: msg.message_id});
 	}
 
 	if (msg.text.match(/миша|мишка|darmy|misha/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/SWCKeoosjekyQ.gif');
+		bot.sendVideo(chatId, 'http://i.giphy.com/SWCKeoosjekyQ.gif', {reply_to_message_id: msg.message_id});
 	}
 
 	if (msg.text.match(/бро|bro/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/Tv2btKgK06tPy.gif');
+		bot.sendVideo(chatId, 'http://i.giphy.com/Tv2btKgK06tPy.gif', {reply_to_message_id: msg.message_id});
 	}
 
 	if (msg.text.match(/ахаха/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/tqf2j43xoEcow.gif');
+		bot.sendVideo(chatId, 'http://i.giphy.com/tqf2j43xoEcow.gif', {reply_to_message_id: msg.message_id});
 	}
 });
