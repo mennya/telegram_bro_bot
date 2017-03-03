@@ -7,6 +7,8 @@ const PORT        = CONF.PORT || 5000;
 
 app.use(bodyParser.json());
 
+console.log(process.env);
+
 const server = app.listen(PORT, "0.0.0.0", function() {
 	const host = server.address().address;
 	const port = server.address().port;
