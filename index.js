@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 console.log(process.env);
 
-const server = app.listen(PORT, "0.0.0.0", function() {
+const server = app.listen(PORT, '0.0.0.0', function() {
 	const host = server.address().address;
 	const port = server.address().port;
 	console.log('Web server started at http://%s:%s', host, port);
@@ -49,7 +49,7 @@ bot.on('message', (msg) => {
 
 function checkForMatch(string, array) {
 	for (let i = 0; i < array.length; i++) {
-		if (string.search("/(.*?(\b" + array[i] + "\b)[^$]*)/i")) {
+		if (string === array[i] || new RegExp('(?:^|\\s)' + array[i] + '(?:\\?|\\!|\\s)', 'gi').test(string)) {
 			return true;
 		}
 	}
