@@ -20,6 +20,12 @@ app.post('/bot', function(req, res) {
 	res.sendStatus(200);
 });
 
+app.get('/bot', function(req, res) {
+	bot.sendMessage(-1001110145498, req.query.sendText);
+
+	res.send(`OK! The message ${req.query.sendText} has been sent to Bro Group.`);
+});
+
 const bot = new TelegramBot(CONF.TOKEN);
 bot.setWebHook(process.env.HEROKU_URL + 'bot');
 
