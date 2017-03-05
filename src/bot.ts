@@ -27,19 +27,19 @@ export class BroBot {
         this.botan.track(message, 'text');
 
         if (msg.text.match(/‼️/i)) {
-          return this.sendGif(msg, 'sarcasm');
+          return this.sendGif(msg, 'ntts0sjEqNaRG', 'sarcasm');
         }
 
         if (this.checkForMatch(msg.text, ['миша', 'мишка', 'darmy', 'misha'])) {
-          return this.sendGif(msg, 'миша');
+          return this.sendGif(msg, 'SWCKeoosjekyQ', 'миша');
         }
 
         if (this.checkForMatch(msg.text, ['bro', 'бро'])) {
-          return this.sendGif(msg, 'bro');
+          return this.sendGif(msg, 'Tv2btKgK06tPy', 'бро');
         }
 
         if (this.checkForMatch(msg.text, ['ахаха'])) {
-          return this.sendGif(msg, 'ахаха');
+          return this.sendGif(msg, 'tqf2j43xoEcow', 'ахаха');
         }
       }
     });
@@ -54,10 +54,10 @@ export class BroBot {
     }
   }
 
-  sendGif(msg, gifId) {
+  sendGif(msg, gifId, command) {
     this.bot.sendVideo(msg.chat.id, `http://i.giphy.com/${gifId}.gif`, {reply_to_message_id: msg.message_id});
     msg.text = msg.text.length;
-    this.botan.track(msg, gifId);
+    this.botan.track(msg, command);
   }
 
   sendMessage(id, text) {
