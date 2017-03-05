@@ -1,6 +1,8 @@
-const TelegramBot = require('node-telegram-bot-api');
+import * as TelegramBot from 'node-telegram-bot-api';
 
-module.exports = class {
+export class BroBot {
+  public bot;
+
   constructor(CONF) {
     if (process.env.NODE_ENV === 'development') {
       this.bot = new TelegramBot(CONF.BOT_TOKEN, {polling: true});
@@ -44,4 +46,4 @@ module.exports = class {
   sendGif(msg, gifId) {
     this.bot.sendVideo(msg.chat.id, `http://i.giphy.com/${gifId}.gif`, {reply_to_message_id: msg.message_id});
   }
-};
+}

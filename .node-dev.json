@@ -1,0 +1,8 @@
+{
+  "notify": false,
+  "ignore": [
+  ],
+  "extensions": {
+    "ts": "ts-node/register"
+  }
+}

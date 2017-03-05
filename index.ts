@@ -1,8 +1,12 @@
-const express    = require('express');
-const bodyParser = require('body-parser');
-const CONF = require('./src/config');
-const app        = express();
-const bot        = new (require('./src/bot'))(CONF);
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import {CONFIG} from './src/config';
+import {BroBot} from './src/bot';
+
+const CONF: any = CONFIG;
+const bot = new BroBot(CONF);
+const app = express();
+
 app.use(bodyParser.json());
 
 const server = app.listen(CONF.PORT, '0.0.0.0', () => {
@@ -11,7 +15,7 @@ const server = app.listen(CONF.PORT, '0.0.0.0', () => {
   console.log('Web server started at http://%s:%s', host, port);
 });
 
-app.post('/bot', function(req, res) {
+app.post('/bot', function (req, res) {
   bot.bot.processUpdate(req.body);
   res.sendStatus(200);
 });
