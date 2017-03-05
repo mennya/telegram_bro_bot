@@ -23,7 +23,7 @@ app.post('/bot', function(req, res) {
 app.get('/bot', function(req, res) {
 	bot.sendMessage(-1001110145498, req.query.sendText);
 
-	res.send(`OK! The message ${req.query.sendText} has been sent to Bro Group.`);
+	res.send(`OK! The message "${req.query.sendText}" has been sent to Bro Group.`);
 });
 
 const bot = new TelegramBot(CONF.TOKEN);
