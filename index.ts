@@ -27,7 +27,7 @@ app.get('/bot', (req, res) => {
     return res.send(`The "sendText" parameter should be provided. Message not sent!`);
   }
 
-  bot.bot.sendMessage(CONF.BRO_GROUP_ID, req.query.sendText);
+  bot.sendMessage(CONF.BRO_GROUP_ID, req.query.sendText);
 
   res.send(`OK! The message "${req.query.sendText}" has been sent to Bro Group.`);
 });
