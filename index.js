@@ -28,19 +28,29 @@ bot.on('message', (msg) => {
 
 	console.log('new', msg);
 
-	if (msg.text && msg.text.match(/‼️/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/ntts0sjEqNaRG.gif', {reply_to_message_id: msg.message_id});
-	}
+	if (msg.text) {
+		if (msg.text.match(/‼️/i)) {
+			bot.sendVideo(chatId, 'http://i.giphy.com/ntts0sjEqNaRG.gif', {reply_to_message_id: msg.message_id});
+		}
 
-	if (msg.text && msg.text.match(/миша|мишка|darmy|misha/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/SWCKeoosjekyQ.gif', {reply_to_message_id: msg.message_id});
-	}
+		if (checkForMatch(msg.text, ['миша', 'мишка', 'darmy', 'misha'])) {
+			bot.sendVideo(chatId, 'http://i.giphy.com/SWCKeoosjekyQ.gif', {reply_to_message_id: msg.message_id});
+		}
 
-	if (msg.text && msg.text.match(/бро|bro/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/Tv2btKgK06tPy.gif', {reply_to_message_id: msg.message_id});
-	}
+		if (checkForMatch(msg.text, ['bro', 'бро'])) {
+			bot.sendVideo(chatId, 'http://i.giphy.com/Tv2btKgK06tPy.gif', {reply_to_message_id: msg.message_id});
+		}
 
-	if (msg.text && msg.text.match(/ахаха/i)) {
-		bot.sendVideo(chatId, 'http://i.giphy.com/tqf2j43xoEcow.gif', {reply_to_message_id: msg.message_id});
+		if (checkForMatch(msg.text, ['ахаха'])) {
+			bot.sendVideo(chatId, 'http://i.giphy.com/tqf2j43xoEcow.gif', {reply_to_message_id: msg.message_id});
+		}
 	}
 });
+
+function checkForMatch(string, array) {
+	for (let i = 0; i < array.length; i++) {
+		if (string.search("/(.*?(\b" + array[i] + "\b)[^$]*)/i")) {
+			return true;
+		}
+	}
+}
