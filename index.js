@@ -48,8 +48,9 @@ bot.on('message', (msg) => {
 });
 
 function checkForMatch(string, array) {
+	const str = string.toLowerCase();
 	for (let i = 0; i < array.length; i++) {
-		if (string === array[i] || new RegExp('(?:^|\\s)' + array[i] + '(?:\\?|\\!|\\s)', 'gi').test(string)) {
+		if (str === array[i] || new RegExp('(?:^|\\s)' + array[i] + '(?:\\?|\\!|$|\\s)', 'gi').test(str)) {
 			return true;
 		}
 	}
