@@ -12,7 +12,7 @@ const server = app.listen(CONF.PORT, '0.0.0.0', () => {
 });
 
 app.post('/bot', function(req, res) {
-	bot.processUpdate(req.body);
+	bot.bot.processUpdate(req.body);
 	res.sendStatus(200);
 });
 
