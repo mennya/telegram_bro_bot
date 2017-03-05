@@ -1,1 +1,1 @@
-module.exports = process.env.NODE_ENV === 'development' ? process.env : require('../config.json');
+module.exports = process.env.NODE_ENV === 'production' ? process.env : require('../config.json');

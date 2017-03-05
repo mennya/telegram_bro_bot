@@ -1,6 +1,6 @@
 const express    = require('express');
 const bodyParser = require('body-parser');
-const CONF       = require('./config');
+const CONF = require('./src/config');
 const app        = express();
 const bot        = new (require('./src/bot'))(CONF);
 app.use(bodyParser.json());
