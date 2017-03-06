@@ -31,6 +31,10 @@ export class BroBot {
           return this.sendGif(msg, 'ntts0sjEqNaRG', 'sarcasm');
         }
 
+        if (msg.text.match(/👍/i)) {
+          return this.sendGif(msg, 'ayhCIyEr5F8hq', 'thumbsup');
+        }
+
         if (this.checkForMatch(msg.text, ['миша', 'мишка', 'darmy', 'misha'])) {
           return this.sendGif(msg, 'SWCKeoosjekyQ', 'миша');
         }
