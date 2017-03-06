@@ -26,7 +26,8 @@ export class BroBot {
         message.text = message.text.length;
         this.botan.track(message, 'text');
 
-        if (msg.text.match(/‼️/i)) {
+        // unicode of !! emoji, web version has another code
+        if (msg.text.match(/\u203C\uFE0F|\u203c/i)) {
           return this.sendGif(msg, 'ntts0sjEqNaRG', 'sarcasm');
         }
 
