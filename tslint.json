@@ -1,0 +1,185 @@
+{
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    // tslint-eslint-rules https://github.com/buzinas/tslint-eslint-rules#rules-copied-from-the-eslint-website
+    // Possible Errors
+
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+    "no-conditional-assignment": true,
+    "no-console": false,
+    "no-constant-condition": true,
+    "no-control-regex": true,
+    "no-debugger": true,
+    "no-duplicate-case": true,
+    "no-empty": true,
+    "no-empty-character-class": true,
+    "no-ex-assign": true,
+    "no-extra-boolean-cast": true,
+    "no-extra-semi": true,
+    "no-inner-declarations": [true, "both"],
+    "no-invalid-regexp": true,
+    "no-irregular-whitespace": true,
+    "no-regex-spaces": true,
+    "no-sparse-arrays": true,
+    "no-unexpected-multiline": true,
+    "no-unsafe-finally": true,
+    "use-isnan": true,
+    //    "valid-jsdoc": [
+    //      true, {
+    //        "prefer": {"return": "returns"},
+    //        "requireReturn": false,
+    //        "requireParamDescription": true,
+    //        "requireReturnDescription": true,
+    //        "matchDescription": "^[A-Z][A-Za-z0-9\\s]*[.]$"
+    //      }
+    //    ],
+    "valid-typeof": true,
+    // Best Practices
+
+    "cyclomatic-complexity": [true, 20],
+    "curly": true,
+    "switch-default": true,
+    "triple-equals": true,
+    "forin": true,
+    "ban": [true, ["alert", "confirm", "prompt"]],
+    "no-arg": true,
+    // "no-empty": true, - duplicate
+    "no-eval": true,
+    "no-switch-case-fall-through": true,
+    "no-invalid-this": true,
+    "label-position": true,
+    "no-magic-numbers": false,
+    "no-multi-spaces": [true],
+    "no-unused-new": true,
+    "no-construct": true,
+    "no-duplicate-variable": true,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "radix": true,
+    // Variables
+
+    "no-shadowed-variable": true,
+    "no-use-before-declare": true,
+    // Stylistic Issues
+
+    "array-bracket-spacing": [true, "never"],
+    "block-spacing": [true, "always"],
+    "brace-style": [true, "1tbs"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "eofline": true,
+    "ter-indent": [true, 2, {"SwitchCase": 1}],
+    "linebreak-style": [true, "LF"],
+    "ter-max-len": [true, 120],
+    "max-file-line-count": [true, 500],
+    "new-parens": true,
+    "no-bitwise": true,
+    "indent": [true, "spaces"],
+    "no-consecutive-blank-lines": [true, 2],
+    "no-trailing-whitespace": true,
+    "object-curly-spacing": [true, "never"],
+    "one-variable-per-declaration": true,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "quotemark": [true, "single", "avoid-escape"],
+    "semicolon": [true, "always"],
+    "ordered-imports": false,
+    "space-in-parens": [true, "never"],
+    "comment-format": [true, "check-space"],
+    // ECMAScript 6
+
+    "ter-arrow-body-style": [true, "as-needed"],
+    "ter-arrow-parens": [true, "always"],
+    "ter-arrow-spacing": [true],
+    "no-var-keyword": true,
+    "object-literal-shorthand": true,
+    "ter-prefer-arrow-callback": [
+      true
+    ],
+    "prefer-const": true,
+    // tslint-eslint-rules ends
+
+    // TSLint https://palantir.github.io/tslint/rules/
+    // TypeScript Specific
+
+    // "adjacent-overload-signatures": true,
+    "ban-types": [true, ["Object", "Use {} instead."], ["String"]],
+    "member-access": true,
+    // member-ordering
+    "no-any": true,
+    "no-empty-interface": true,
+    "no-import-side-effect": false,
+    "no-inferrable-types": true,
+    "no-internal-module": true,
+    // no-magic-numbers - already
+    "no-namespace": true,
+    "no-non-null-assertion": true,
+    "no-reference": true,
+    "no-var-requires": false,
+    "only-arrow-functions": false,
+    "prefer-for-of": true,
+    // "promise-function-async": true, - need --type-check
+    "typedef": true,
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "unified-signatures": true,
+    // Maintainability
+
+    // cyclomatic-complexity - already
+    // eofline - already
+    // indent - already
+    // linebreak-style - already
+    "max-classes-per-file": [true, 1],
+    // max-file-line-count - already
+    // max-line-length - already
+    "no-default-export": true,
+    "no-mergeable-namespace": true,
+    "no-require-imports": false,
+    "object-literal-sort-keys": false,
+    // prefer-const - already
+    // trailing-comma - already
+    // Style
+
+    "align": [true, "parameters", "statements"],
+    "array-type": [true, "array"],
+    // arrow-parens - already
+    "arrow-return-shorthand": [true, "multiline"],
+    "class-name": true,
+    // comment-format - already
+    // completed-docs - no need
+    // file-header - no need
+    "import-spacing": false,
+    "interface-name": [true, "always-prefix"],
+    "interface-over-type-literal": true,
+    "jsdoc-format": true,
+    // "match-default-export-name": true, - need --type-check
+    "newline-before-return": true,
+    // new-parens - already
+    "no-angle-bracket-type-assertion": true,
+    // "no-boolean-literal-compare": true, - need --type-check
+    // no-consecutive-blank-lines - already
+    "no-parameter-properties": false,
+    // no-trailing-whitespace - already
+    "no-unnecessary-initializer": true,
+    // "no-unnecessary-qualifier": true, - need --type-check
+    // object-literal-key-quotes - already
+    // object-literal-shorthand - already
+    "one-line": [true, "check-catch", "check-else", "check-open-brace", "check-whitespace"],
+    // one-variable-per-declaration - already
+    // ordered-imports - already
+    "prefer-function-over-method": false,
+    "prefer-method-signature": true,
+    // quotemark - already
+    // semicolon - already
+    "space-before-function-paren": ["error", {"anonymous": "never", "named": "never"}],
+    // variable-name - already
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"]
+  }
+}

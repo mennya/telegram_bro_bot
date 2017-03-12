@@ -1,5 +1,28 @@
 import * as fs from 'fs';
 
+interface IConf {
+  /**
+   * token from BotFather https://telegram.me/botfather
+   */
+  BOT_TOKEN: string;
+  /**
+   * app metrica token
+   */
+  BOTANIO_TOKEN: string;
+  /**
+   * An url to connect database
+   */
+  MONGOLAB_URI: string;
+  /**
+   * Port to run http server
+   */
+  PORT: string;
+  /**
+   * Users who can edit answers
+   */
+  ADMINS: string;
+}
+
 let CONF;
 
 if (process.env.NODE_ENV === 'production') {
@@ -9,4 +32,4 @@ if (process.env.NODE_ENV === 'production') {
   CONF = JSON.parse(CONF);
 }
 
-export const CONFIG = CONF;
+export const CONFIG: IConf = CONF;
