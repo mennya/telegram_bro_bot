@@ -45,7 +45,7 @@ class BroBot {
         }
 
         this.storageSrv.getAnswers().forEach((item) => {
-          if (some(item.patterns, (pattern) => !/^\d+$/.test(pattern) && pattern.toLowerCase() === msg.text)) {
+          if (some(item.patterns, (pattern) => pattern.toLowerCase() === msg.text.toLowerCase())) {
             switch (item.type) {
               case 'gif':
                 this.sendGif(msg, item.text, item.name);

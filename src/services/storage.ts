@@ -14,8 +14,6 @@ class StorageService {
     {patterns: ['миша', 'мишка', 'darmy', 'misha'], text: 'CgADBAADhAQAAg0aZAewgLgkqS3_qwI', type: 'gif', name: 'Миша'},
     {patterns: ['‼️'], text: 'CgADBAADzxUAAvkZZAdp_PlEJi5-KwI', type: 'gif', name: 'sarcasm'},
     {patterns: ['ахаха'], text: 'CgADBAADSCgAAlsdZAcx-3FXQ6RIZwI', type: 'gif', name: 'ахаха'},
-    {patterns: ['text_test'], text: 'text_test passed', type: 'text', name: 'text_test'},
-    {patterns: ['sticker_test'], text: 'CAADBQADXwEAAukKyAOSo-65_GBH4AI', type: 'sticker', name: 'sticker_test'},
     {patterns: ['👍'], text: 'CgADBAADZgcAAs4bZAdx4-IPO9SMtgI', type: 'gif', name: 'thumbsup'},
     {patterns: ['bro', 'бро'], text: 'CgADBAADSQgAAqcZZAdrBr4UYDAlUwI', type: 'gif', name: 'bro'}
   ];
