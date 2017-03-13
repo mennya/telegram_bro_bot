@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {CONFIG} from './src/config';
-import {broBot} from './src/services/bot';
+import {bot} from './src/services/bot';
 import {mongo} from './src/common/db';
 
 const app = express();
@@ -16,6 +16,6 @@ const server = app.listen(CONFIG.PORT, '0.0.0.0', () => {
 });
 
 app.post('/bot', (req, res) => {
-  broBot.processUpdate(req.body);
+  bot.processUpdate(req.body);
   res.sendStatus(200);
 });

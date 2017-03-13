@@ -13,6 +13,6 @@ export class Main {
   }
 
   public $answer() {
-    return `Hello from BRO BOT!\nWhat can i do for you?`;
+    return `Hello from Auto Answer BOT!\nWhat can i do for you?`;
   }
 }

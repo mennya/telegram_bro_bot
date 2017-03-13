@@ -10,7 +10,7 @@ import {formsSrv} from './forms';
 // unicode of !! emoji, web version has another code
 // if (msg.text.match(/\u203C\uFE0F|\u203c/i)) {
 
-class BroBot {
+class AutoAnswerBot {
   public bot;
   private botan;
   private botCallbacks;
@@ -117,4 +117,4 @@ class BroBot {
   }
 }
 
-export const broBot = new BroBot();
+export const bot = new AutoAnswerBot();

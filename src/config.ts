@@ -14,7 +14,7 @@ interface IConf {
    */
   MONGOLAB_URI: string;
   /**
-   * Port to run http server
+   * Port to run http server locally, heroku set's PORT env variable automatically
    */
   PORT: string;
   /**
