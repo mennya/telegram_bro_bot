@@ -12,6 +12,6 @@ export class Add {
 
   public $answer() {
     return `OK, now send me a name for your auto answer.\nShould be a word without spaces, using only Latin ` +
-      `alphabet, less than 10 letters`;
+      `and Cyrillic alphabet, less than 10 letters.\nCurrently list is limited to 28 elements.`;
   }
 }
