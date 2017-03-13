@@ -3,9 +3,12 @@ import {storageSrv} from '../services/storage';
 
 export class ChangePatterns {
   private name;
+  private answer;
 
   constructor() {
     this.name = storageSrv.getSessionData().name;
+    this.answer = storageSrv.getAnswerByName(this.name);
+
   }
 
   public $inlineKeyboard() {
@@ -19,6 +22,8 @@ export class ChangePatterns {
   }
 
   public $answer() {
-    return `OK. Send me new patterns in JSON array format.\nExample: ["hello","привет"]`;
+    return `OK. Send me new patterns in JSON array format.\nExample: ["hello","привет"]\nOnly strings are allowed` +
+      ` inside array.\nThe string will be converted to lowercase.\nCurrent patterns are: ` +
+      `${JSON.stringify(this.answer.patterns)}`;
   }
 }

@@ -1,7 +1,7 @@
 import {remove, findIndex, cloneDeep} from 'lodash';
 import {answersModel} from '../models/answers';
 
-interface IAnswers {
+export interface IAnswers {
   patterns?: [string];
   text?;
   type?;

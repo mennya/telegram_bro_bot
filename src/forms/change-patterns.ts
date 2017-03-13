@@ -4,7 +4,7 @@ import {isArray, isString} from 'lodash';
 
 export class ChangePatternsForm {
   private answer;
-  private patterns;
+  private patterns: [string];
   public chatId;
   public keyboard = new ChangePatternsEnd();
 
@@ -25,10 +25,11 @@ export class ChangePatternsForm {
     if (err || !isArray(this.patterns)) {
       return 'Not a JSON array!';
     }
-    this.patterns.forEach((item) => {
+    this.patterns.forEach((item, i) => {
       if (!item || !isString(item)) {
         err = true;
       }
+      this.patterns[i] = item.toLowerCase();
     });
     if (err) {
       return 'Only strings inside array';
