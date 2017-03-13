@@ -19,6 +19,8 @@ export class ChangeTextForm {
       this.answer.text = msg.document.file_id;
     } else if (this.answer.type === 'sticker' && msg.sticker) {
       this.answer.text = msg.sticker.file_id;
+    } else if (this.answer.type === 'photo' && msg.photo) {
+      this.answer.text = msg.photo[1].file_id;
     } else {
       return `Seems like you send me something wrong :(\nPlease send a ${this.answer.type}.`;
     }

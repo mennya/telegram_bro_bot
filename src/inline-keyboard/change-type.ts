@@ -15,6 +15,7 @@ export class ChangeType {
       .addButton({text: 'gif', callback_data: 'ChangeTypeEnd gif'})
       .addButton({text: 'text', callback_data: 'ChangeTypeEnd text'})
       .addButton({text: 'sticker', callback_data: 'ChangeTypeEnd sticker'})
+      .addButton({text: 'photo', callback_data: 'ChangeTypeEnd photo'})
       .newLine()
       .addButton({text: `Back to ${this.name}`, callback_data: `Back Edit ${this.name}`});
 

@@ -54,6 +54,9 @@ class AutoAnswerBot {
               case 'text':
                 this.sendText(msg, item.text, item.name);
                 break;
+              case 'photo':
+                this.sendPhoto(msg, item.text, item.name);
+                break;
               case 'sticker':
                 this.sendSticker(msg, item.text, item.name);
                 break;
@@ -113,6 +116,11 @@ class AutoAnswerBot {
 
   private sendGif(msg, gifId, command) {
     this.bot.sendDocument(msg.chat.id, gifId, {reply_to_message_id: msg.message_id});
+    this.track(msg, command);
+  }
+
+  private sendPhoto(msg, photoId, command) {
+    this.bot.sendPhoto(msg.chat.id, photoId, {reply_to_message_id: msg.message_id});
     this.track(msg, command);
   }
 }
