@@ -27,6 +27,19 @@ class AutoAnswerBot {
 
     this.botan = new Botanio(CONFIG.BOTANIO_TOKEN);
 
+    this.bot.on('inline_query', (msg) => {
+      if (msg.query) {
+        this.bot.answerInlineQuery(msg.id, [
+          {
+            type: 'article',
+            id: 'article',
+            title: 'Send formatted text with disabled web page preview',
+            input_message_content: {message_text: msg.query, disable_web_page_preview: true}
+          }
+        ]);
+      }
+    });
+
     this.bot.on('message', (msg) => {
       let answered = false;
       let isCommand = false;
@@ -47,21 +60,21 @@ class AutoAnswerBot {
         this.storageSrv.getAnswers().forEach((item) => {
           if (some(item.patterns, (pattern) => pattern === msg.text.toLowerCase())) {
             switch (item.type) {
-              case 'gif':
-                this.sendGif(msg, item.text, item.name);
-                answered = true;
-                break;
-              case 'text':
-                this.sendText(msg, item.text, item.name);
-                break;
-              case 'photo':
-                this.sendPhoto(msg, item.text, item.name);
-                break;
-              case 'sticker':
-                this.sendSticker(msg, item.text, item.name);
-                break;
-              default:
-                this.bot.sendMessage(msg.chat.id, 'Unknown type!');
+            case 'gif':
+              this.sendGif(msg, item.text, item.name);
+              answered = true;
+              break;
+            case 'text':
+              this.sendText(msg, item.text, item.name);
+              break;
+            case 'photo':
+              this.sendPhoto(msg, item.text, item.name);
+              break;
+            case 'sticker':
+              this.sendSticker(msg, item.text, item.name);
+              break;
+            default:
+              this.bot.sendMessage(msg.chat.id, 'Unknown type!');
             }
           }
         });
