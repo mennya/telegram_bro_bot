@@ -34,7 +34,7 @@ class AutoAnswerBot {
             type: 'article',
             id: 'article',
             title: 'Send formatted text with disabled web page preview',
-            input_message_content: {message_text: msg.query, disable_web_page_preview: true}
+            input_message_content: {message_text: msg.query, parse_mode: 'Markdown', disable_web_page_preview: true}
           }
         ]);
       }
