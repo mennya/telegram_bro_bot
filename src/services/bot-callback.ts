@@ -15,6 +15,7 @@ import {ChangeName} from '../inline-keyboard/change-name';
 import {CONFIG} from '../config';
 import {ChangePatterns} from '../inline-keyboard/change-patterns';
 import {ChangePatternsForm} from '../forms/change-patterns';
+import {includes} from 'lodash';
 
 export class BotCallbacks {
   private ADMINS = CONFIG.ADMINS.split(',');
@@ -102,6 +103,6 @@ export class BotCallbacks {
   private isAdmin(userId) {
     this.isAdmAction = true;
 
-    return this.ADMINS.includes(userId.toString());
+    return includes(this.ADMINS, userId.toString());
   }
 }
