@@ -14,9 +14,13 @@ interface IConf {
    */
   PORT: string;
   /**
-   * Users who can edit answers
+   * Users id's who can edit answers
    */
   ADMINS: string;
+  /**
+   * SUPER ADMIN ID
+   */
+  SUPER_ADMIN: string;
 }
 
 let CONF;

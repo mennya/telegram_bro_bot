@@ -19,3 +19,14 @@ app.post('/bot', (req, res) => {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
+
+function exitHandler(options, err) {
+  bot.sendErr(`options: ${options}, err: ${JSON.stringify(err)}`);
+  process.exit(99);
+}
+
+process.on('exit', exitHandler.bind(null, 'exit'));
+process.on('SIGINT', exitHandler.bind(null, 'SIGINT'));
+process.on('SIGTERM', exitHandler.bind(null, 'SIGTERM'));
+process.on('SIGBREAK', exitHandler.bind(null, 'SIGBREAK'));
+process.on('SIGHUP', exitHandler.bind(null, 'SIGHUP'));

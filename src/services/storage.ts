@@ -10,13 +10,7 @@ export interface IAnswers {
 
 class StorageService {
   private chatId;
-  private answersList: [IAnswers] = [
-    {patterns: ['миша', 'мишка', 'darmy', 'misha'], text: 'CgADBAADhAQAAg0aZAewgLgkqS3_qwI', type: 'gif', name: 'Миша'},
-    {patterns: ['‼️'], text: 'CgADBAADzxUAAvkZZAdp_PlEJi5-KwI', type: 'gif', name: 'sarcasm'},
-    {patterns: ['ахаха'], text: 'CgADBAADSCgAAlsdZAcx-3FXQ6RIZwI', type: 'gif', name: 'ахаха'},
-    {patterns: ['👍'], text: 'CgADBAADZgcAAs4bZAdx4-IPO9SMtgI', type: 'gif', name: 'thumbsup'},
-    {patterns: ['bro', 'бро'], text: 'CgADBAADSQgAAqcZZAdrBr4UYDAlUwI', type: 'gif', name: 'bro'}
-  ];
+  private answersList: [IAnswers];
   private session = {};
 
   constructor() {

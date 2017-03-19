@@ -1,5 +1,6 @@
 import {CONFIG} from '../config';
 import {connection, connect} from 'mongoose';
+import {bot} from '../services/bot';
 
 class Mongo {
   public db;
@@ -16,6 +17,7 @@ class Mongo {
 }
 
 function errHandler(error) {
+  bot.sendErr(`DB ${error}`);
   console.log(error);
 }
 

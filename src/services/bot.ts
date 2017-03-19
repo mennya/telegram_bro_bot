@@ -1,5 +1,5 @@
 import * as TelegramBot from 'node-telegram-bot-api';
-import {clone, some, forEach} from 'lodash';
+import {some, forEach} from 'lodash';
 import {CONFIG} from '../config';
 import {storageSrv} from './storage';
 import {BotCallbacks} from './bot-callback';
@@ -18,9 +18,9 @@ class AutoAnswerBot {
 
   constructor() {
     if (process.env.NODE_ENV === 'development') {
-      this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {polling: true});
+      this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {polling: true, filepath: false});
     } else {
-      this.bot = new TelegramBot(CONFIG.BOT_TOKEN);
+      this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {filepath: false});
       this.bot.setWebHook(process.env.HEROKU_URL + 'bot');
     }
 
@@ -38,7 +38,6 @@ class AutoAnswerBot {
     });
 
     this.bot.on('message', (msg) => {
-      let answered = false;
       let isCommand = false;
       console.log('new:', msg);
 
@@ -49,15 +48,12 @@ class AutoAnswerBot {
           const main = new Main();
 
           this.bot.sendMessage(msg.chat.id, main.$answer(), {reply_markup: main.$inlineKeyboard()});
-          this.track(msg, msg.text);
-          answered = true;
           isCommand = true;
         }
 
         if (msg.text === '/mem') {
           this.bot.sendMessage(msg.chat.id, `${process.memoryUsage().heapTotal / 1048576} Mb`);
 
-          answered = true;
           isCommand = true;
         }
 
@@ -65,27 +61,22 @@ class AutoAnswerBot {
           if (some(item.patterns, (pattern) => pattern === msg.text.toLowerCase())) {
             switch (item.type) {
             case 'gif':
-              this.sendGif(msg, item.text, item.name);
-              answered = true;
+              this.sendGif(msg, item.text);
               break;
             case 'text':
-              this.sendText(msg, item.text, item.name);
+              this.sendText(msg, item.text);
               break;
             case 'photo':
-              this.sendPhoto(msg, item.text, item.name);
+              this.sendPhoto(msg, item.text);
               break;
             case 'sticker':
-              this.sendSticker(msg, item.text, item.name);
+              this.sendSticker(msg, item.text);
               break;
             default:
               this.bot.sendMessage(msg.chat.id, 'Unknown type!');
             }
           }
         });
-
-        if (!answered) {
-          this.track(msg, 'text');
-        }
       }
 
       if (!isCommand) {
@@ -105,39 +96,53 @@ class AutoAnswerBot {
         });
       }
     });
-    this.botCallbacks = new BotCallbacks(this.bot);
 
-    // console.log(this.bot._events);
+    this.bot.on('polling_error', (error) => {
+      this.bot.send(CONFIG.SUPER_ADMIN, `polling_error: ${error}`);
+    });
+
+    this.bot.on('webhook_error', (error) => {
+      this.bot.send(CONFIG.SUPER_ADMIN, `webhook_error: ${error}`);
+    });
+
+    this.botCallbacks = new BotCallbacks(this.bot);
   }
 
   public processUpdate(body) {
     this.bot.processUpdate(body);
   }
 
-  private track(msg, command) {
-    const message = clone(msg);
-    // do not save message text to appmetrica
-    message.text = message.text.length;
+  public sendErr(text) {
+    console.error(text);
+    this.bot.sendMessage(CONFIG.SUPER_ADMIN, `Err in ${text}`);
   }
 
-  private sendText(msg, text, command) {
-    this.bot.sendMessage(msg.chat.id, text, {reply_to_message_id: msg.message_id});
-    this.track(msg, command);
+  private sendText(msg, text) {
+    this.bot.sendMessage(msg.chat.id, text, {reply_to_message_id: msg.message_id})
+      .catch((error) => {
+        this.sendErr(`sendText ${error}`);
+      });
   }
 
-  private sendSticker(msg, sticker, command) {
-    this.bot.sendSticker(msg.chat.id, sticker, {reply_to_message_id: msg.message_id});
-    this.track(msg, command);
+  private sendSticker(msg, sticker) {
+    this.bot.sendSticker(msg.chat.id, sticker, {reply_to_message_id: msg.message_id})
+      .catch((error) => {
+        this.sendErr(`sendSticker ${error}`);
+      });
   }
 
-  private sendGif(msg, gifId, command) {
-    this.bot.sendDocument(msg.chat.id, gifId, {reply_to_message_id: msg.message_id});
-    this.track(msg, command);
+  private sendGif(msg, gifId) {
+    this.bot.sendDocument(msg.chat.id, gifId, {reply_to_message_id: msg.message_id})
+      .catch((error) => {
+        this.sendErr(`sendGif error: ${error}`);
+      });
   }
 
-  private sendPhoto(msg, photoId, command) {
-    this.bot.sendPhoto(msg.chat.id, photoId, {reply_to_message_id: msg.message_id});
-    this.track(msg, command);
+  private sendPhoto(msg, photoId) {
+    this.bot.sendPhoto(msg.chat.id, photoId, {reply_to_message_id: msg.message_id})
+      .catch((error) => {
+        this.sendErr(`sendPhoto error: ${error}`);
+      });
   }
 }
 
