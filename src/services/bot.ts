@@ -53,6 +53,13 @@ class AutoAnswerBot {
           isCommand = true;
         }
 
+        if (msg.text === '/mem') {
+          this.bot.sendMessage(msg.chat.id, `${process.memoryUsage().heapTotal / 1048576} Mb`);
+
+          answered = true;
+          isCommand = true;
+        }
+
         this.storageSrv.getAnswers().forEach((item) => {
           if (some(item.patterns, (pattern) => pattern === msg.text.toLowerCase())) {
             switch (item.type) {
