@@ -1,5 +1,4 @@
 import * as TelegramBot from 'node-telegram-bot-api';
-import * as Botanio from 'botanio';
 import {clone, some} from 'lodash';
 import {CONFIG} from '../config';
 import {storageSrv} from './storage';
@@ -12,7 +11,6 @@ import {formsSrv} from './forms';
 
 class AutoAnswerBot {
   public bot;
-  private botan;
   private botCallbacks;
   private formsSrv = formsSrv;
   private storageSrv = storageSrv;
@@ -24,8 +22,6 @@ class AutoAnswerBot {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN);
       this.bot.setWebHook(process.env.HEROKU_URL + 'bot');
     }
-
-    this.botan = new Botanio(CONFIG.BOTANIO_TOKEN);
 
     this.bot.on('inline_query', (msg) => {
       if (msg.query) {
@@ -114,7 +110,6 @@ class AutoAnswerBot {
     const message = clone(msg);
     // do not save message text to appmetrica
     message.text = message.text.length;
-    this.botan.track(message, command);
   }
 
   private sendText(msg, text, command) {

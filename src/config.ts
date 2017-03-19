@@ -6,10 +6,6 @@ interface IConf {
    */
   BOT_TOKEN: string;
   /**
-   * app metrica token
-   */
-  BOTANIO_TOKEN: string;
-  /**
    * An url to connect database
    */
   MONGOLAB_URI: string;
