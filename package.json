@@ -2,7 +2,6 @@
   "name": "telegram_bro_bot",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "node-dev ./index.ts"
   },

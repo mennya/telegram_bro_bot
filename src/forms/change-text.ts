@@ -1,10 +1,12 @@
 import {storageSrv} from '../services/storage';
 import {ChangeTextEnd} from '../inline-keyboard/change-text-end';
+import {IForm} from './form';
 
-export class ChangeTextForm {
-  private answer;
+export class ChangeTextForm implements IForm {
   public chatId;
   public keyboard = new ChangeTextEnd();
+
+  private answer;
 
   constructor(msg) {
     this.chatId = msg.chat.id;

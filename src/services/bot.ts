@@ -1,10 +1,11 @@
 import * as TelegramBot from 'node-telegram-bot-api';
-import {clone, some} from 'lodash';
+import {clone, some, forEach} from 'lodash';
 import {CONFIG} from '../config';
 import {storageSrv} from './storage';
 import {BotCallbacks} from './bot-callback';
 import {Main} from '../inline-keyboard/main';
 import {formsSrv} from './forms';
+import {IForm} from '../forms/form';
 
 // unicode of !! emoji, web version has another code
 // if (msg.text.match(/\u203C\uFE0F|\u203c/i)) {
@@ -88,7 +89,7 @@ class AutoAnswerBot {
       }
 
       if (!isCommand) {
-        this.formsSrv.getForms().forEach((item) => {
+        forEach(this.formsSrv.getForms(), (item: IForm) => {
           if (msg.chat.id === item.chatId) {
             const validate = item.validate(msg);
 

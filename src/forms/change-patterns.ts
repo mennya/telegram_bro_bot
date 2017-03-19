@@ -1,12 +1,14 @@
 import {storageSrv} from '../services/storage';
 import {ChangePatternsEnd} from '../inline-keyboard/change-patterns-end';
 import {isArray, isString} from 'lodash';
+import {IForm} from './form';
 
-export class ChangePatternsForm {
-  private answer;
-  private patterns: [string];
+export class ChangePatternsForm implements IForm {
   public chatId;
   public keyboard = new ChangePatternsEnd();
+
+  private answer;
+  private patterns: [string];
 
   constructor(msg) {
     this.chatId = msg.chat.id;

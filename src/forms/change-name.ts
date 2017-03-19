@@ -1,13 +1,15 @@
 import {storageSrv} from '../services/storage';
 import {remove} from 'lodash';
 import {ChangeNameEnd} from '../inline-keyboard/change-name-end';
+import {IForm} from './form';
 
-export class ChangeNameForm {
+export class ChangeNameForm implements IForm {
   public chatId;
   public keyboard = new ChangeNameEnd();
-  public answers = [];
-  public answer;
-  public name;
+
+  private answers = [];
+  private answer;
+  private name;
 
   constructor(msg) {
     this.chatId = msg.chat.id;

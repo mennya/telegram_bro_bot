@@ -1,14 +1,12 @@
-import {remove} from 'lodash';
-
 class FormsService {
-  private formsList = [];
+  private formsList = {};
 
   public register(form) {
-    this.formsList.push(form);
+    this.formsList[form.chatId] = form;
   }
 
   public unRegister(form) {
-    remove(this.formsList, (item) => item.chatId === form.chatId);
+    delete this.formsList[form.chatId];
   }
 
   public getForms() {

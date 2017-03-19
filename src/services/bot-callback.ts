@@ -37,6 +37,7 @@ export class BotCallbacks {
       }
 
       storageSrv.setSession(msg.chat.id);
+      formsSrv.unRegister({chatId: msg.chat.id});
 
       switch (action[0]) {
         case 'Edit':

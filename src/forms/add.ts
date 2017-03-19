@@ -1,7 +1,8 @@
 import {storageSrv} from '../services/storage';
 import {AddEnd} from '../inline-keyboard/add-end';
+import {IForm} from './form';
 
-export class AddForm {
+export class AddForm implements IForm {
   public chatId;
   public keyboard = new AddEnd();
 
