@@ -1,6 +1,7 @@
 import {storageSrv} from '../services/storage';
 import {ChangeTextEnd} from '../inline-keyboard/change-text-end';
 import {IForm} from './form';
+import {subscription} from '../services/subscribtion';
 
 export class ChangeTextForm implements IForm {
   public chatId;
@@ -14,6 +15,7 @@ export class ChangeTextForm implements IForm {
 
   public validate(msg) {
     this.answer = storageSrv.getAnswerByName(storageSrv.getSessionData().name);
+    const oldText = this.answer.text;
 
     if (this.answer.type === 'text') {
       this.answer.text = msg.text;
@@ -28,5 +30,6 @@ export class ChangeTextForm implements IForm {
     }
 
     storageSrv.editAnswerByName(this.answer);
+    subscription.notify(`changed text in *${this.answer.name}* from *${oldText}* to`, this.answer.text);
   }
 }

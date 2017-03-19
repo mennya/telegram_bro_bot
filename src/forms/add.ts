@@ -1,6 +1,7 @@
 import {storageSrv} from '../services/storage';
 import {AddEnd} from '../inline-keyboard/add-end';
 import {IForm} from './form';
+import {subscription} from '../services/subscribtion';
 
 export class AddForm implements IForm {
   public chatId;
@@ -27,5 +28,6 @@ export class AddForm implements IForm {
       return `Such name already exists!`;
     }
     storageSrv.newAnswer(msg.text);
+    subscription.notify('add new answer', msg.text);
   }
 }

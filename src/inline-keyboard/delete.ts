@@ -1,5 +1,6 @@
 import {InlineKeyboard} from './inline-keyboard';
 import {storageSrv} from '../services/storage';
+import {subscription} from '../services/subscribtion';
 
 export class Delete {
   private name;
@@ -7,6 +8,7 @@ export class Delete {
   constructor() {
     this.name = storageSrv.getSessionData().name;
     storageSrv.delAnswerByName(this.name);
+    subscription.notify('delete', this.name);
   }
 
   public $inlineKeyboard() {

@@ -22,7 +22,7 @@ export class ChangePatterns {
   }
 
   public $answer() {
-    return `OK. Send me new patterns in JSON array format.\nExample: ["hello","привет"]\nOnly strings are allowed` +
+    return `OK. Send me new patterns in JSON array format.\nExample: /["hello","привет"/]\nOnly strings are allowed` +
       ` inside array.\nThe string will be converted to lowercase.\nCurrent patterns are: ` +
       `${JSON.stringify(this.answer.patterns)}`;
   }

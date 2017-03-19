@@ -1,5 +1,6 @@
 import {InlineKeyboard} from './inline-keyboard';
 import {storageSrv} from '../services/storage';
+import {subscription} from '../services/subscribtion';
 
 export class ChangeTypeEnd {
   private name;
@@ -10,6 +11,7 @@ export class ChangeTypeEnd {
     this.type = action[1];
     this.name = storageSrv.getSessionData().name;
     this.answer = storageSrv.getAnswerByName(this.name);
+    subscription.notify(`changed type in *${this.answer.name}* from *${this.answer.type}* to`, this.type);
     this.answer.type = this.type;
     storageSrv.editAnswerByName(this.answer);
   }

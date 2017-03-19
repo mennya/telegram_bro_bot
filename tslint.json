@@ -68,7 +68,7 @@
     "brace-style": [true, "1tbs"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "eofline": true,
-    "ter-indent": [true, 2, {"SwitchCase": 1}],
+    "ter-indent": [true, 2],
     "linebreak-style": [true, "LF"],
     "ter-max-len": [true, 120],
     "max-file-line-count": [true, 500],

@@ -2,6 +2,7 @@ import {storageSrv} from '../services/storage';
 import {ChangePatternsEnd} from '../inline-keyboard/change-patterns-end';
 import {isArray, isString} from 'lodash';
 import {IForm} from './form';
+import {subscription} from '../services/subscribtion';
 
 export class ChangePatternsForm implements IForm {
   public chatId;
@@ -17,6 +18,7 @@ export class ChangePatternsForm implements IForm {
   public validate(msg) {
     let err;
     this.answer = storageSrv.getAnswerByName(storageSrv.getSessionData().name);
+    const oldPatterns = this.answer.patterns;
 
     try {
       this.patterns = JSON.parse(msg.text);
@@ -38,5 +40,7 @@ export class ChangePatternsForm implements IForm {
     }
     this.answer.patterns = this.patterns;
     storageSrv.editAnswerByName(this.answer);
+    subscription.notify(`changed patterns in *${this.answer.name}* from *${JSON.stringify(oldPatterns)}* to`,
+      JSON.stringify(this.answer.patterns));
   }
 }

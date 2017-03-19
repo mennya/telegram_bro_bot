@@ -2,6 +2,7 @@ import {storageSrv} from '../services/storage';
 import {remove} from 'lodash';
 import {ChangeNameEnd} from '../inline-keyboard/change-name-end';
 import {IForm} from './form';
+import {subscription} from '../services/subscribtion';
 
 export class ChangeNameForm implements IForm {
   public chatId;
@@ -40,5 +41,6 @@ export class ChangeNameForm implements IForm {
     this.answer.name = msg.text;
     storageSrv.newAnswer(msg.text);
     storageSrv.editAnswerByName(this.answer);
+    subscription.notify(`changed name from *${this.name}* to`, msg.text);
   }
 }

@@ -5,14 +5,16 @@ export class Main {
     const inlineKeyboard = new InlineKeyboard();
 
     inlineKeyboard
-      .addButton({text: 'List', callback_data: `List`})
+      .addButton({text: 'Settings', callback_data: `Settings`})
       .newLine()
-      .addButton({text: 'Add', callback_data: 'Add'});
+      .addButton({text: 'List auto answers', callback_data: `List`})
+      .newLine()
+      .addButton({text: 'Add new auto answer', callback_data: 'Add'});
 
     return inlineKeyboard.toString();
   }
 
   public $answer() {
-    return `Hello from Auto Answer BOT!\nWhat can i do for you?`;
+    return `Hello from BRO BOT!\nWhat can i do for you?`;
   }
 }

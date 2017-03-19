@@ -98,11 +98,13 @@ class AutoAnswerBot {
     });
 
     this.bot.on('polling_error', (error) => {
-      this.bot.send(CONFIG.SUPER_ADMIN, `polling_error: ${error}`);
+      this.sendErr(`polling_error: ${error}`);
+      console.error(error);
     });
 
     this.bot.on('webhook_error', (error) => {
-      this.bot.send(CONFIG.SUPER_ADMIN, `webhook_error: ${error}`);
+      this.sendErr(`webhook_error: ${error}`);
+      console.error(error);
     });
 
     this.botCallbacks = new BotCallbacks(this.bot);
@@ -115,6 +117,10 @@ class AutoAnswerBot {
   public sendErr(text) {
     console.error(text);
     this.bot.sendMessage(CONFIG.SUPER_ADMIN, `Err in ${text}`);
+  }
+
+  public sendMsg(id, text) {
+    this.bot.sendMessage(id, text, {parse_mode: 'Markdown'});
   }
 
   private sendText(msg, text) {
