@@ -17,6 +17,7 @@ export class Edit {
     inlineKeyboard
       .addButton({text: 'Delete', callback_data: `Delete`})
       .addButton({text: 'Change text', callback_data: `ChangeText`})
+      .newLine()
       .addButton({text: 'Change name', callback_data: `ChangeName`})
       .addButton({text: 'Change type', callback_data: `ChangeType`})
       .newLine()
