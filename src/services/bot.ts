@@ -1,14 +1,18 @@
 import * as TelegramBot from 'node-telegram-bot-api';
-import {some, forEach} from 'lodash';
+import {forEach, some} from 'lodash';
 import {CONFIG} from '../config';
 import {storageSrv} from './storage';
 import {BotCallbacks} from './bot-callback';
 import {Main} from '../inline-keyboard/main';
 import {formsSrv} from './forms';
 import {IForm} from '../forms/form';
+import * as request from 'request';
 
 // unicode of !! emoji, web version has another code
 // if (msg.text.match(/\u203C\uFE0F|\u203c/i)) {
+
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' +
+  'Chrome/56.0.2924.87 Safari/537.36';
 
 class AutoAnswerBot {
   public bot;
@@ -55,6 +59,21 @@ class AutoAnswerBot {
           this.bot.sendMessage(msg.chat.id, `${process.memoryUsage().heapTotal / 1048576} Mb`);
 
           isCommand = true;
+        }
+
+        if (msg.text.match(/vk.com/i)) {
+          this.bot.sendChatAction(msg.chat.id, 'upload_video');
+          request({
+            url: msg.text, headers: {
+              'User-Agent': USER_AGENT
+            }
+          }, (err, response, body) => {
+            const res = body.match(/(href=")(\/doc[^\'\"]+)/);
+            if (res && res.length) {
+              this.bot.sendVideo(msg.chat.id, request.get(`https://vk.com${res[2]}&wnd=1&module=wall&mp4=1`),
+                {disable_notification: false, reply_to_message_id: msg.message_id});
+            }
+          });
         }
 
         this.storageSrv.getAnswers().forEach((item) => {
