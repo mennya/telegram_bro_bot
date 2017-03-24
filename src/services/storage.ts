@@ -1,4 +1,4 @@
-import {remove, findIndex, cloneDeep, extend, isArray} from 'lodash';
+import {cloneDeep, extend, findIndex, isArray, remove} from 'lodash';
 import {answersModel} from '../models/answers';
 import {settingsModel} from '../models/settings';
 
@@ -73,7 +73,7 @@ class StorageService {
   }
 
   public editAnswerByName(pattern) {
-    answersModel.update({name: pattern.name}, pattern, (err) => console.error(err));
+    answersModel.update({_id: pattern._id}, pattern, {upsert: true}, (err) => console.error(err));
     this.answersList[findIndex(this.answersList, (item) => item.name === pattern.name)] = pattern;
   }
 
