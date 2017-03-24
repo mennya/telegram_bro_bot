@@ -14,7 +14,7 @@ export class List {
 
     inlineKeyboard
       .chunk(4)
-      .addButton({text: 'Back to main menu', callback_data: 'Back Main'});
+      .addButton({text: '🔙Back to main menu', callback_data: 'Back Main'});
 
     return inlineKeyboard.toString();
   }

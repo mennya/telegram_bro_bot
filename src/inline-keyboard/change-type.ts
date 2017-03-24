@@ -17,7 +17,7 @@ export class ChangeType {
       .addButton({text: 'sticker', callback_data: 'ChangeTypeEnd sticker'})
       .addButton({text: 'photo', callback_data: 'ChangeTypeEnd photo'})
       .newLine()
-      .addButton({text: `Back to ${this.name}`, callback_data: `Back Edit ${this.name}`});
+      .addButton({text: `🔙Back to ${this.name}`, callback_data: `Back Edit ${this.name}`});
 
     return inlineKeyboard.toString();
   }

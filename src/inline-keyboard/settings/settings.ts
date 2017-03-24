@@ -7,7 +7,7 @@ export class Settings {
     inlineKeyboard
       .addButton({text: `Subscribe?`, callback_data: `Subscribe`})
       .newLine()
-      .addButton({text: 'Back to main menu', callback_data: 'Back Main'});
+      .addButton({text: '🔙Back to main menu', callback_data: 'Back Main'});
 
     return inlineKeyboard.toString();
   }

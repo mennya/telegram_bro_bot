@@ -16,7 +16,7 @@ export class ChangePatterns {
 
     inlineKeyboard
       .newLine()
-      .addButton({text: `Back to ${this.name}`, callback_data: `Back Edit ${this.name}`});
+      .addButton({text: `🔙Back to ${this.name}`, callback_data: `Back Edit ${this.name}`});
 
     return inlineKeyboard.toString();
   }

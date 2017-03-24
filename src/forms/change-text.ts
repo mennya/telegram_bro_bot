@@ -17,6 +17,10 @@ export class ChangeTextForm implements IForm {
     this.answer = storageSrv.getAnswerByName(storageSrv.getSessionData().name);
     const oldText = this.answer.text;
 
+    if (!this.answer.type) {
+      return `Oops, you need to set auto answer type first!`;
+    }
+
     if (this.answer.type === 'text') {
       this.answer.text = msg.text;
     } else if (this.answer.type === 'gif' && msg.document) {

@@ -15,7 +15,7 @@ export class Edit {
     const inlineKeyboard = new InlineKeyboard();
 
     inlineKeyboard
-      .addButton({text: 'Delete', callback_data: `Delete`})
+      .addButton({text: '➖Delete ⚠️', callback_data: `Delete`})
       .addButton({text: 'Change text', callback_data: `ChangeText`})
       .newLine()
       .addButton({text: 'Change name', callback_data: `ChangeName`})
@@ -23,7 +23,7 @@ export class Edit {
       .newLine()
       .addButton({text: 'Modify patterns', callback_data: `ChangePatterns`})
       .newLine()
-      .addButton({text: 'Back to list', callback_data: 'Back List'});
+      .addButton({text: '🔙Back to list', callback_data: 'Back List'});
 
     return inlineKeyboard.toString();
   }

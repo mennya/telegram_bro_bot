@@ -5,11 +5,11 @@ export class Main {
     const inlineKeyboard = new InlineKeyboard();
 
     inlineKeyboard
-      .addButton({text: 'Settings', callback_data: `Settings`})
+      .addButton({text: '🛠Settings', callback_data: `Settings`})
       .newLine()
-      .addButton({text: 'List auto answers', callback_data: `List`})
+      .addButton({text: '🗂List auto answers', callback_data: `List`})
       .newLine()
-      .addButton({text: 'Add new auto answer', callback_data: 'Add'});
+      .addButton({text: '➕Add new auto answer', callback_data: 'Add'});
 
     return inlineKeyboard.toString();
   }
