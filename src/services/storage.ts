@@ -67,9 +67,9 @@ class StorageService {
   }
 
   public newAnswer(name) {
-    const newAnswer = new answersModel({name});
+    const newAnswer: any = new answersModel({name});
     newAnswer.save();
-    this.answersList.push({name});
+    this.answersList.push(newAnswer);
   }
 
   public editAnswerByName(pattern) {
