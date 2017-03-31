@@ -134,8 +134,10 @@ class AutoAnswerBot {
   }
 
   public sendErr(text) {
-    console.error(text);
-    this.bot.sendMessage(CONFIG.SUPER_ADMIN, `Err in ${text}`);
+    if (text) {
+      console.error(text);
+      this.bot.sendMessage(CONFIG.SUPER_ADMIN, `Err in ${text}`);
+    }
   }
 
   public sendMsg(id, text) {
