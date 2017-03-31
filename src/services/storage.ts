@@ -1,6 +1,7 @@
 import {cloneDeep, extend, findIndex, isArray, remove} from 'lodash';
 import {answersModel} from '../models/answers';
 import {settingsModel} from '../models/settings';
+import {bot} from './bot';
 
 export interface IAnswers {
   patterns?: [string];
@@ -54,7 +55,7 @@ class StorageService {
   }
 
   public delSetting(userId) {
-    settingsModel.remove({userId}, (err) => console.error(err));
+    settingsModel.remove({userId}, (err) => bot.sendErr(err));
     this.settings = remove(this.settings, (item) => item.userId === userId);
   }
 
@@ -73,12 +74,12 @@ class StorageService {
   }
 
   public editAnswerByName(pattern) {
-    answersModel.update({_id: pattern._id}, pattern, {upsert: true}, (err) => console.error(err));
+    answersModel.update({_id: pattern._id}, pattern, {upsert: true}, (err) => bot.sendErr(err));
     this.answersList[findIndex(this.answersList, (item) => item.name === pattern.name)] = pattern;
   }
 
   public delAnswerByName(name) {
-    answersModel.remove({name}, (err) => console.error(err));
+    answersModel.remove({name}, (err) => bot.sendErr(err));
     remove(this.answersList, (item) => item.name === name);
   }
 
