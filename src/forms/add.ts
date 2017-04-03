@@ -12,9 +12,6 @@ export class AddForm implements IForm {
   }
 
   public validate(msg) {
-    if (storageSrv.getAnswers().length > 28) {
-      return `Sorry, auto answers count can't be bigger than 28 :(`;
-    }
     if (msg.text.length > 10) {
       return 'Should be less than 10 symbols!';
     }
