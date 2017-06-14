@@ -67,7 +67,7 @@ class AutoAnswerBot {
               'User-Agent': USER_AGENT
             }
           }, (err, response, body) => {
-            const res = body.match(/(href=")(\/doc[^\'\"]+)/);
+            const res = body && body.match(/(href=")(\/doc[^\'\"]+)/);
             if (res && res.length) {
               this.bot.sendChatAction(msg.chat.id, 'upload_video');
               this.bot.sendVideo(msg.chat.id, request.get(`https://vk.com${res[2]}&wnd=1&module=wall&mp4=1`),
