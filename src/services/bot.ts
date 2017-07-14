@@ -71,7 +71,10 @@ class AutoAnswerBot {
             if (res && res.length) {
               this.bot.sendChatAction(msg.chat.id, 'upload_video');
               this.bot.sendVideo(msg.chat.id, request.get(`https://vk.com${res[2]}&wnd=1&module=wall&mp4=1`),
-                {disable_notification: false, reply_to_message_id: msg.message_id});
+                {disable_notification: false, reply_to_message_id: msg.message_id})
+                .catch((error) => {
+                  this.sendErr(`sendText ${error}`);
+                });
             }
           });
         }
