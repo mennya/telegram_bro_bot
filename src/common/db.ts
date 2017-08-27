@@ -7,7 +7,9 @@ class Mongo {
 
   constructor() {
     connection.on('error', errHandler);
-    connect(CONFIG.MONGOLAB_URI);
+    connect(CONFIG.MONGOLAB_URI, {
+      useMongoClient: true
+    });
 
     this.db = connection;
     this.db.on('error', errHandler);
