@@ -1,5 +1,6 @@
 import * as TelegramBot from 'node-telegram-bot-api';
 import {forEach, some} from 'lodash';
+import * as cheerio from 'cheerio';
 import {CONFIG} from '../config';
 import {storageSrv} from './storage';
 import {BotCallbacks} from './bot-callback';
@@ -67,7 +68,9 @@ class AutoAnswerBot {
               'User-Agent': USER_AGENT
             }
           }, (err, response, body) => {
-            const res = body && body.match(/(href=")(\/doc[^\'\"]+)/);
+            const $ = cheerio.load(body);
+            let res = body && body.match(/(href=")(\/doc[^\'\"]+)/);
+
             if (res && res.length) {
               this.bot.sendChatAction(msg.chat.id, 'upload_video');
               this.bot.sendVideo(msg.chat.id, request.get(`https://vk.com${res[2]}&wnd=1&module=wall&mp4=1`),
@@ -75,6 +78,22 @@ class AutoAnswerBot {
                 .catch((error) => {
                   this.sendErr(`sendText ${error}`);
                 });
+            }
+
+            res = $('.page_post_sized_thumbs a');
+
+            if (res && res.length && res.length > 1) {
+              const urls = [];
+              this.bot.sendChatAction(msg.chat.id, 'upload_photo');
+              res.each((i, elem) => {
+                const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
+                const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
+
+                const url = parsed.base + parsed.x_[0] + '.jpg';
+                urls.push({type: 'photo', media: url});
+              });
+              this.bot
+                .sendMediaGroup(msg.chat.id, urls);
             }
           });
         }
