@@ -22,13 +22,13 @@
     "@types/mongoose-promise": "4.5.7",
     "@types/node": "8.5.2",
     "body-parser": "1.18.2",
+    "cheerio": "1.0.0-rc.2",
     "express": "4.16.2",
     "lodash": "4.17.4",
     "mongoose": "4.11.8",
     "node-telegram-bot-api": "https://github.com/mennya/node-telegram-bot-api.git",
     "ts-node": "4.1.0",
-    "typescript": "2.6.2",
-    "cheerio": "1.0.0-rc.2"
+    "typescript": "2.6.2"
   },
   "engines": {
     "node": "9.3.0",

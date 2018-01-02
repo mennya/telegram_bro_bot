@@ -20,8 +20,10 @@ class AutoAnswerBot {
   private botCallbacks;
   private formsSrv = formsSrv;
   private storageSrv = storageSrv;
+  private intervalClear = null;
 
   constructor() {
+    this.stopSendChatAction = this.stopSendChatAction.bind(this);
     if (process.env.NODE_ENV === 'development') {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {polling: true, filepath: false});
     } else {
@@ -69,13 +71,15 @@ class AutoAnswerBot {
             }
           }, (err, response, body) => {
             const $ = cheerio.load(body);
-            let res = body && body.match(/(href=")(\/doc[^\'\"]+)/);
+            let res = $('.wall_text a.page_doc_photo_href');
 
-            if (res && res.length) {
-              this.bot.sendChatAction(msg.chat.id, 'upload_video');
-              this.bot.sendVideo(msg.chat.id, request.get(`https://vk.com${res[2]}&wnd=1&module=wall&mp4=1`),
+            if (res && res.length && res.length > 0) {
+              this.sendChatAction(msg, 'upload_video');
+              this.bot.sendVideo(msg.chat.id, `https://vk.com${res.attr('href')}&wnd=1&module=wall`,
                 {disable_notification: false, reply_to_message_id: msg.message_id})
+                .then(this.stopSendChatAction)
                 .catch((error) => {
+                  this.stopSendChatAction();
                   this.sendErr(`sendText ${error}`);
                 });
             }
@@ -84,7 +88,8 @@ class AutoAnswerBot {
 
             if (res && res.length && res.length > 1) {
               const urls = [];
-              this.bot.sendChatAction(msg.chat.id, 'upload_photo');
+              this.sendChatAction(msg, 'upload_photo');
+
               res.each((i, elem) => {
                 const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
                 const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
@@ -93,7 +98,12 @@ class AutoAnswerBot {
                 urls.push({type: 'photo', media: url});
               });
               this.bot
-                .sendMediaGroup(msg.chat.id, urls);
+                .sendMediaGroup(msg.chat.id, urls)
+                .then(this.stopSendChatAction)
+                .catch((error) => {
+                  this.stopSendChatAction();
+                  this.sendErr(`sendText ${error}`);
+                });
             }
           });
         }
@@ -192,6 +202,25 @@ class AutoAnswerBot {
       .catch((error) => {
         this.sendErr(`sendPhoto error: ${error}`);
       });
+  }
+
+  private sendChatAction(msg, status) {
+    this.intervalClear = setInterval(() => {
+      this.bot.sendChatAction(msg.chat.id, status)
+        .catch((error) => {
+          this.sendErr(`sendChatAction error: ${error}`);
+        });
+    }, 5000);
+    this.bot.sendChatAction(msg.chat.id, status)
+      .catch((error) => {
+        this.sendErr(`sendChatAction error: ${error}`);
+      });
+  }
+
+  private stopSendChatAction() {
+    if (this.intervalClear) {
+      clearInterval(this.intervalClear);
+    }
   }
 }
 
