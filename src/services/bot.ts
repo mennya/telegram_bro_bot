@@ -86,7 +86,7 @@ class AutoAnswerBot {
 
             res = $('.page_post_sized_thumbs a');
 
-            if (res && res.length && res.length > 1) {
+            if (res && res.length && res.length > 1 && res.length <= 10) {
               const urls = [];
               this.sendChatAction(msg, 'upload_photo');
 
@@ -104,6 +104,8 @@ class AutoAnswerBot {
                   this.stopSendChatAction();
                   this.sendErr(`sendText ${error}`);
                 });
+            } else if (res && res.length && res.length > 10) {
+              this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 10 images max.');
             }
           });
         }
