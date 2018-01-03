@@ -98,7 +98,7 @@ class AutoAnswerBot {
                 urls.push({type: 'photo', media: url});
               });
               this.bot
-                .sendMediaGroup(msg.chat.id, urls)
+                .sendMediaGroup(msg.chat.id, urls, {disable_notification: false, reply_to_message_id: msg.message_id})
                 .then(this.stopSendChatAction)
                 .catch((error) => {
                   this.stopSendChatAction();
