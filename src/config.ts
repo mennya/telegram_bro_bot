@@ -30,6 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   CONF = fs.readFileSync('./config.json', 'UTF-8');
   CONF = JSON.parse(CONF);
+  // process.env.DEBUG = 'node-telegram-bot-api';
 }
 
 export const CONFIG: IConf = CONF;
