@@ -73,10 +73,12 @@ class AutoAnswerBot {
             const $ = cheerio.load(body);
             // if has data-preview attr, then it's a mp4
             const mp4Gif = $('.wall_text a.page_doc_photo_href[data-preview]');
+            // if has no data-preview attr, then it's a gif, telegram do not download it,
+            // so we need to pass a steam using request
+            const gif = $('.wall_text a.page_doc_photo_href');
 
             if (mp4Gif && mp4Gif.length && mp4Gif.length > 0) {
               const url = `https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall&mp4=1`;
-              console.log('url', url);
               this.sendChatAction(msg, 'upload_video');
               this.bot.sendVideo(msg.chat.id, url,
                 {disable_notification: false, reply_to_message_id: msg.message_id})
@@ -85,13 +87,7 @@ class AutoAnswerBot {
                   this.stopSendChatAction();
                   this.sendErr(`sendText ${error}, URL https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall`);
                 });
-            }
-
-            // if has no data-preview attr, then it's a gif, telegram do not download it,
-            // so we need to pass a steam using request
-            const gif = $('.wall_text a.page_doc_photo_href');
-
-            if (gif && gif.length && gif.length > 0) {
+            } else if (gif && gif.length && gif.length > 0) {
               const url = `https://vk.com${gif.attr('href')}&wnd=1&module=wall`;
               this.sendChatAction(msg, 'upload_video');
               this.bot.sendVideo(msg.chat.id, request(url),
