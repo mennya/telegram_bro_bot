@@ -70,7 +70,13 @@ class AutoAnswerBot {
               'User-Agent': USER_AGENT
             }
           }, (err, response, body) => {
-            const $ = cheerio.load(body);
+            let $;
+            try {
+              $ = cheerio.load(body);
+            } catch (e) {
+              console.error(e);
+              this.sendErr(`sendText ${e}`);
+            }
             // if has data-preview attr, then it's a mp4
             const mp4Gif = $('.wall_text a.page_doc_photo_href[data-preview]');
             // if has no data-preview attr, then it's a gif, telegram do not download it,
