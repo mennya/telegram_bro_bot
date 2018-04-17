@@ -46,7 +46,7 @@ class AutoAnswerBot {
 
     this.bot.on('message', (msg) => {
       let isCommand = false;
-      console.log('new:', msg);
+      // console.log('new:', msg);
 
       if (msg.text) {
 
