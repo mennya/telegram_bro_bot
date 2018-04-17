@@ -73,60 +73,60 @@ class AutoAnswerBot {
             let $;
             try {
               $ = cheerio.load(body);
+              // if has data-preview attr, then it's a mp4
+              const mp4Gif = $('.wall_text a.page_doc_photo_href[data-preview]');
+              // if has no data-preview attr, then it's a gif, telegram do not download it,
+              // so we need to pass a steam using request
+              const gif = $('.wall_text a.page_doc_photo_href');
+
+              if (mp4Gif && mp4Gif.length && mp4Gif.length > 0) {
+                const url = `https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall&mp4=1`;
+                this.sendChatAction(msg, 'upload_video');
+                this.bot.sendVideo(msg.chat.id, url,
+                  {disable_notification: false, reply_to_message_id: msg.message_id})
+                  .then(this.stopSendChatAction)
+                  .catch((error) => {
+                    this.stopSendChatAction();
+                    this.sendErr(`sendText ${error}, URL https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall`);
+                  });
+              } else if (gif && gif.length && gif.length > 0) {
+                const url = `https://vk.com${gif.attr('href')}&wnd=1&module=wall`;
+                this.sendChatAction(msg, 'upload_video');
+                this.bot.sendVideo(msg.chat.id, request(url),
+                  {disable_notification: false, reply_to_message_id: msg.message_id})
+                  .then(this.stopSendChatAction)
+                  .catch((error) => {
+                    this.stopSendChatAction();
+                    this.sendErr(`sendText ${error}, URL https://vk.com${gif.attr('href')}&wnd=1&module=wall`);
+                  });
+              }
+
+              const imgRes = $('.wall_text .page_post_sized_thumbs a');
+
+              if (imgRes && imgRes.length && imgRes.length > 1 && imgRes.length <= 10) {
+                const urls = [];
+                this.sendChatAction(msg, 'upload_photo');
+
+                imgRes.each((i, elem) => {
+                  const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
+                  const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
+
+                  const url = parsed.base + parsed.x_[0] + '.jpg';
+                  urls.push({type: 'photo', media: url});
+                });
+                this.bot
+                  .sendMediaGroup(msg.chat.id, urls, {disable_notification: false, reply_to_message_id: msg.message_id})
+                  .then(this.stopSendChatAction)
+                  .catch((error) => {
+                    this.stopSendChatAction();
+                    this.sendErr(`sendText ${error}`);
+                  });
+              } else if (imgRes && imgRes.length && imgRes.length > 10) {
+                this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 10 images max.');
+              }
             } catch (e) {
               console.error(e);
               this.sendErr(`sendText ${e}`);
-            }
-            // if has data-preview attr, then it's a mp4
-            const mp4Gif = $('.wall_text a.page_doc_photo_href[data-preview]');
-            // if has no data-preview attr, then it's a gif, telegram do not download it,
-            // so we need to pass a steam using request
-            const gif = $('.wall_text a.page_doc_photo_href');
-
-            if (mp4Gif && mp4Gif.length && mp4Gif.length > 0) {
-              const url = `https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall&mp4=1`;
-              this.sendChatAction(msg, 'upload_video');
-              this.bot.sendVideo(msg.chat.id, url,
-                {disable_notification: false, reply_to_message_id: msg.message_id})
-                .then(this.stopSendChatAction)
-                .catch((error) => {
-                  this.stopSendChatAction();
-                  this.sendErr(`sendText ${error}, URL https://vk.com${mp4Gif.attr('href')}&wnd=1&module=wall`);
-                });
-            } else if (gif && gif.length && gif.length > 0) {
-              const url = `https://vk.com${gif.attr('href')}&wnd=1&module=wall`;
-              this.sendChatAction(msg, 'upload_video');
-              this.bot.sendVideo(msg.chat.id, request(url),
-                {disable_notification: false, reply_to_message_id: msg.message_id})
-                .then(this.stopSendChatAction)
-                .catch((error) => {
-                  this.stopSendChatAction();
-                  this.sendErr(`sendText ${error}, URL https://vk.com${gif.attr('href')}&wnd=1&module=wall`);
-                });
-            }
-
-            const imgRes = $('.wall_text .page_post_sized_thumbs a');
-
-            if (imgRes && imgRes.length && imgRes.length > 1 && imgRes.length <= 10) {
-              const urls = [];
-              this.sendChatAction(msg, 'upload_photo');
-
-              imgRes.each((i, elem) => {
-                const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
-                const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
-
-                const url = parsed.base + parsed.x_[0] + '.jpg';
-                urls.push({type: 'photo', media: url});
-              });
-              this.bot
-                .sendMediaGroup(msg.chat.id, urls, {disable_notification: false, reply_to_message_id: msg.message_id})
-                .then(this.stopSendChatAction)
-                .catch((error) => {
-                  this.stopSendChatAction();
-                  this.sendErr(`sendText ${error}`);
-                });
-            } else if (imgRes && imgRes.length && imgRes.length > 10) {
-              this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 10 images max.');
             }
           });
         }
