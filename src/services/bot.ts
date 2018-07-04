@@ -103,7 +103,7 @@ class AutoAnswerBot {
 
               const imgRes = $('.wall_text .page_post_sized_thumbs a');
 
-              if (imgRes && imgRes.length && imgRes.length > 1 && imgRes.length <= 10) {
+              if (imgRes && imgRes.length && imgRes.length > 1 && imgRes.length <= 9) {
                 const urls = [];
                 this.sendChatAction(msg, 'upload_photo');
 
@@ -121,8 +121,8 @@ class AutoAnswerBot {
                     this.stopSendChatAction();
                     this.sendErr(`sendMediaGroup ${error} ${JSON.stringify(urls)}`);
                   });
-              } else if (imgRes && imgRes.length && imgRes.length > 10) {
-                this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 10 images max.');
+              } else if (imgRes && imgRes.length && imgRes.length > 9) {
+                this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 9 images max.');
               }
             } catch (e) {
               console.error(e);
