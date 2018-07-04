@@ -112,7 +112,9 @@ class AutoAnswerBot {
                   const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
 
                   const url = parsed.base + parsed.x_[0] + '.jpg';
-                  urls.push({type: 'photo', media: url});
+                  if (urls.length < 10) {
+                    urls.push({type: 'photo', media: url});
+                  }
                 });
                 this.bot
                   .sendMediaGroup(msg.chat.id, urls, {disable_notification: false, reply_to_message_id: msg.message_id})
