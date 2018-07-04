@@ -112,7 +112,7 @@ class AutoAnswerBot {
                   const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
 
                   const url = parsed.base + parsed.x_[0] + '.jpg';
-                  if (urls.length < 10) {
+                  if (urls.length < 9) {
                     urls.push({type: 'photo', media: url});
                   }
                 });
@@ -121,7 +121,7 @@ class AutoAnswerBot {
                   .then(this.stopSendChatAction)
                   .catch((error) => {
                     this.stopSendChatAction();
-                    this.sendErr(`sendMediaGroup ${error} ${JSON.stringify(urls)}`);
+                    this.sendErr(`sendMediaGroup ${error} ${urls.length} ${JSON.stringify(urls)}`);
                   });
               } else if (imgRes && imgRes.length && imgRes.length > 10) {
                 this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 10 images max.');
