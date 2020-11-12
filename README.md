@@ -1,7 +1,7 @@
 # telegram BROb_bot
 ## Starting
 * Copy this repository `git clone https://github.com/mennya/telegram_bro_bot.git` 
-* Type `npm i` to install all dependencies.  
+* Type `npm ci` to install all dependencies.  
 * Create `config.json` file.  
 * Type `npm run dev` to start development.  
 
