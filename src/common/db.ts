@@ -8,7 +8,6 @@ class Mongo {
   constructor() {
     connection.on('error', errHandler);
     connect(CONFIG.MONGOLAB_URI, {
-      useMongoClient: true
     });
 
     this.db = connection;
