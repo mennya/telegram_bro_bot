@@ -20,6 +20,10 @@ app.post('/bot', (req, res) => {
   res.sendStatus(200);
 });
 
+app.get('/', (req, res) => {
+  res.sendStatus(200);
+});
+
 function exitHandler(options, err) {
   bot.sendErr(`options: ${options}, err: ${JSON.stringify(err)}`);
   process.exit(99);
