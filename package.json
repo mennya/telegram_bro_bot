@@ -26,7 +26,7 @@
     "cheerio": "1.0.0-rc.2",
     "dotenv": "8.2.0",
     "express": "4.16.4",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "mongoose": "4.11.8",
     "node-telegram-bot-api": "https://github.com/mennya/node-telegram-bot-api.git",
     "ts-node": "7.0.1",
