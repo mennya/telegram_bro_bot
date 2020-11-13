@@ -27,7 +27,7 @@
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "lodash": "4.17.20",
-    "mongoose": "4.13.21",
+    "mongoose": "5.7.5",
     "node-telegram-bot-api": "https://github.com/mennya/node-telegram-bot-api.git",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"
