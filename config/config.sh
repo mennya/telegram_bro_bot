@@ -25,3 +25,4 @@ systemctl enable mongodb
 
 certbot certonly --standalone --preferred-challenges http -d example.com
 ps -ax | grep node
+service nginx reload
