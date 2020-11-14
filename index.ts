@@ -1,7 +1,7 @@
-import {bot} from './src/services/bot';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {CONFIG} from './src/config';
+import {bot} from './src/services/bot';
 import {mongo} from './src/common/db';
 
 const app = express();

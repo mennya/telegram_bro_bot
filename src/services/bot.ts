@@ -1,9 +1,3 @@
-process.env.NTBA_FIX_319 = 'true';
-import {Promise} from 'bluebird';
-
-Promise.config({
-  cancellation: true
-});
 import * as TelegramBot from 'node-telegram-bot-api';
 import {forEach, some} from 'lodash';
 import * as cheerio from 'cheerio';
