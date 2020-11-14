@@ -1,0 +1,22 @@
+server {
+    server_name example.com;
+
+	  listen 443 ssl;
+	  listen [::]:443 ssl;
+    ssl_certificate /etc/letsencrypt/live/<name>/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/<name>/privkey.pem;
+
+    listen 80;
+    gzip on;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+    client_max_body_size 16G;
+    send_timeout 3600;
+    proxy_read_timeout 3600;
+    proxy_send_timeout 3600;
+    proxy_request_buffering off;
+
+    location /bot {
+        proxy_pass  http://example.com:5050/;
+    }
+}

@@ -8,9 +8,9 @@ class Mongo {
   constructor() {
     connection.on('error', errHandler);
     connect(CONFIG.MONGOLAB_URI, {
-      // useCreateIndex: true,
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
 
     this.db = connection;
