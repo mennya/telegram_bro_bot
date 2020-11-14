@@ -32,8 +32,8 @@
     "typescript": "4.0.5"
   },
   "engines": {
-    "node": "10.23.0",
-    "npm": "6.14.8"
+    "node": "15.2.0",
+    "npm": "7.0.11"
   },
   "devDependencies": {
     "node-dev": "6.2.0",

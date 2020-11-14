@@ -1,3 +1,9 @@
+process.env.NTBA_FIX_319 = 'true';
+import {Promise} from 'bluebird';
+
+Promise.config({
+  cancellation: true
+});
 import * as TelegramBot from 'node-telegram-bot-api';
 import {forEach, some} from 'lodash';
 import * as cheerio from 'cheerio';
@@ -134,20 +140,20 @@ class AutoAnswerBot {
         this.storageSrv.getAnswers().forEach((item) => {
           if (some(item.patterns, (pattern) => pattern === msg.text.toLowerCase())) {
             switch (item.type) {
-            case 'gif':
-              this.sendGif(msg, item.text);
-              break;
-            case 'text':
-              this.sendText(msg, item.text);
-              break;
-            case 'photo':
-              this.sendPhoto(msg, item.text);
-              break;
-            case 'sticker':
-              this.sendSticker(msg, item.text);
-              break;
-            default:
-              this.bot.sendMessage(msg.chat.id, 'Unknown type!');
+              case 'gif':
+                this.sendGif(msg, item.text);
+                break;
+              case 'text':
+                this.sendText(msg, item.text);
+                break;
+              case 'photo':
+                this.sendPhoto(msg, item.text);
+                break;
+              case 'sticker':
+                this.sendSticker(msg, item.text);
+                break;
+              default:
+                this.bot.sendMessage(msg.chat.id, 'Unknown type!');
             }
           }
         });
