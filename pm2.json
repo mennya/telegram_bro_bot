@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "app-name",
+      "script": "/root/telegram_bro_bot/node_modules/.bin/ts-node",
+      "args": "./index.ts",
+      "watch": true,
+      "ignore_watch": [],
+      "instances": "1",
+      "exec_mode": "cluster",
+      "env": {
+        "production": true
+      }
+    }
+  ]
+}
