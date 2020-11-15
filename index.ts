@@ -7,7 +7,7 @@ import {mongo} from './src/common/db';
 const app = express();
 const mongoDB = mongo;
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 const server = app.listen(CONFIG.PORT, '0.0.0.0', () => {
   const host = server.address().address;

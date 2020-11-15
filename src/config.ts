@@ -6,5 +6,6 @@ export const CONFIG = {
   MONGOLAB_URI: process.env.MONGOLAB_URI,
   PORT: process.env.PORT,
   ADMINS: process.env.ADMINS,
-  SUPER_ADMIN: process.env.SUPER_ADMIN
+  SUPER_ADMIN: process.env.SUPER_ADMIN,
+  HEROKU_URL: process.env.HEROKU_URL
 };
