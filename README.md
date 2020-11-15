@@ -5,6 +5,7 @@
 * Create `.env` file.  
 * Type `npm run dev` to start development.  
 * Type `pm2 start ecosystem.config.js` to start prod.  
+* Type `pm2 startup` to start prod automatically on server reboot.  
 
 ## Configs
 Configs are not stored in git, because of privacy.  

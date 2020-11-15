@@ -28,7 +28,7 @@ class AutoAnswerBot {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {polling: true, filepath: false});
     } else {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {filepath: false});
-      this.bot.setWebHook(process.env.HEROKU_URL + 'bot');
+      this.bot.setWebHook(process.env.HEROKU_URL);
     }
 
     this.bot.on('inline_query', (msg) => {
