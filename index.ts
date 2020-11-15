@@ -26,9 +26,12 @@ app.get('/', (req, res) => {
 
 function exitHandler(options, err) {
   bot.sendErr(`options: ${options}, err: ${JSON.stringify(err)}`);
+  console.log(`options: ${options}, err: ${JSON.stringify(err)}`);
   process.exit(99);
 }
 
+process.on('uncaughtException', exitHandler.bind(null, 'uncaughtException'));
+process.on('unhandledRejection', exitHandler.bind(null, 'unhandledRejection'));
 process.on('exit', exitHandler.bind(null, 'exit'));
 process.on('SIGINT', exitHandler.bind(null, 'SIGINT'));
 process.on('SIGTERM', exitHandler.bind(null, 'SIGTERM'));
