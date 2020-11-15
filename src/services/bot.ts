@@ -30,11 +30,10 @@ class AutoAnswerBot {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {
         filepath: false,
         webHook: {
-          port: 443
         }
       });
       console.log(CONFIG.HEROKU_URL);
-      this.bot.setWebHook(CONFIG.HEROKU_URL + CONFIG.BOT_TOKEN);
+      this.bot.setWebHook(CONFIG.HEROKU_URL);
     }
 
     this.bot.on('inline_query', (msg) => {
