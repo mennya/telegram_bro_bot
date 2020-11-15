@@ -7,18 +7,18 @@ import {mongo} from './src/common/db';
 const app = express();
 const mongoDB = mongo;
 
-app.use(express.json());
+// app.use(express.json());
 
-const server = app.listen(CONFIG.PORT, '0.0.0.0', () => {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('Web server started at http://%s:%s', host, port);
-});
+// const server = app.listen(CONFIG.PORT, '0.0.0.0', () => {
+//   const host = server.address().address;
+//   const port = server.address().port;
+//   console.log('Web server started at http://%s:%s', host, port);
+// });
 
-app.post('/bot', (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
-});
+// app.post('/bot', (req, res) => {
+//   bot.processUpdate(req.body);
+//   res.sendStatus(200);
+// });
 
 app.get('/', (req, res) => {
   res.sendStatus(200);
