@@ -22,7 +22,7 @@ apt install -y mongodb && \
 systemctl start mongodb.service && \
 systemctl enable mongodb
 
-
+letsencrypt certonly -n -d domain1.com -d domain2.ru --email admin@domain.ru --standalone --noninteractive --agree-tos
 certbot certonly --standalone --preferred-challenges http -d example.com
 ps -ax | grep node
 service nginx reload

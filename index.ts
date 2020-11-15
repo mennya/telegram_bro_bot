@@ -16,6 +16,7 @@ const server = app.listen(CONFIG.PORT, '0.0.0.0', () => {
 });
 
 app.post('/bot', (req, res) => {
+  console.log('Post', req.body);
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
