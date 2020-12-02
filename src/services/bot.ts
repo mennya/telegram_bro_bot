@@ -128,7 +128,9 @@ class AutoAnswerBot {
                 .then(this.stopSendChatAction)
                 .catch((error) => {
                   this.stopSendChatAction();
-                  this.sendErr(`sendMediaGroup ${error} ${JSON.stringify(urls)}`);
+                  this.sendErr(
+                    `sendMediaGroup \n in url ${msg.text} \n ${error} \n Parsed urls: ${JSON.stringify(urls)}
+                  `);
                 });
               if (imgRes?.length > 10) {
                 this.sendMsg(msg.chat.id, `Too much images. Albums can handle 9 images max. ${imgRes.length} found!`);
