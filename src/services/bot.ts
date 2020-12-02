@@ -13,7 +13,7 @@ import * as request from 'request';
 // if (msg.text.match(/\u203C\uFE0F|\u203c/i)) {
 
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' +
-  'Chrome/56.0.2924.87 Safari/537.36';
+  'Chrome/87.0.4280.66 Safari/537.36';
 
 class AutoAnswerBot {
   public bot;
@@ -29,10 +29,8 @@ class AutoAnswerBot {
     } else {
       this.bot = new TelegramBot(CONFIG.BOT_TOKEN, {
         filepath: false,
-        webHook: {
-        }
+        webHook: {}
       });
-      console.log(CONFIG.HEROKU_URL);
       this.bot.setWebHook(CONFIG.HEROKU_URL);
     }
 
@@ -107,31 +105,38 @@ class AutoAnswerBot {
               }
 
               const imgRes = $('.wall_text .page_post_sized_thumbs a');
+              /*
+              For testing:
+              9 pictures https://vk.com/wall-182051100_532832
+              10 pictures https://vk.com/wall-23213239_476553
+               */
+              const urls = [];
+              this.sendChatAction(msg, 'upload_photo');
 
-              if (imgRes && imgRes.length && imgRes.length > 1 && imgRes.length <= 9) {
-                const urls = [];
-                this.sendChatAction(msg, 'upload_photo');
+              imgRes.each((i, elem) => {
+                const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
+                const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
 
-                imgRes.each((i, elem) => {
-                  const attrs = $(elem).attr('onclick').split(', {')[1].split('},');
-                  const parsed = JSON.parse('{' + attrs[0] + '}}').temp;
-
-                  const url = parsed.base + parsed.x_[0] + '.jpg';
-                  urls.push({type: 'photo', media: url});
+                const url = parsed.base + parsed.x_[0];
+                urls.push({type: 'photo', media: url});
+              });
+              this.bot
+                .sendMediaGroup(msg.chat.id, urls.splice(1, 9), {
+                  disable_notification: false,
+                  reply_to_message_id: msg.message_id
+                })
+                .then(this.stopSendChatAction)
+                .catch((error) => {
+                  this.stopSendChatAction();
+                  this.sendErr(`sendMediaGroup ${error} ${JSON.stringify(urls)}`);
                 });
-                this.bot
-                  .sendMediaGroup(msg.chat.id, urls, {disable_notification: false, reply_to_message_id: msg.message_id})
-                  .then(this.stopSendChatAction)
-                  .catch((error) => {
-                    this.stopSendChatAction();
-                    this.sendErr(`sendMediaGroup ${error} ${JSON.stringify(urls)}`);
-                  });
-              } else if (imgRes && imgRes.length && imgRes.length > 9) {
-                this.sendMsg(msg.chat.id, 'Too much images. Albums can handle 9 images max.');
+              if (imgRes?.length > 10) {
+                this.sendMsg(msg.chat.id, `Too much images. Albums can handle 9 images max. ${imgRes.length} found!`);
               }
             } catch (e) {
               console.error(e);
               this.sendErr(`sendText ${e}`);
+              this.stopSendChatAction();
             }
           });
         }
