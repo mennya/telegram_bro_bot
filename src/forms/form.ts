@@ -1,5 +1,6 @@
 export interface IForm {
-  chatId;
-  keyboard;
-  validate(msg);
+	chatId
+	keyboard
+
+	validate(msg)
 }

@@ -59,39 +59,98 @@
     "radix": true,
     // Variables
 
-    "no-shadowed-variable": true,
-    "no-use-before-declare": true,
-    // Stylistic Issues
+	"no-shadowed-variable": true,
+	"no-use-before-declare": true,
+	// Stylistic Issues
 
-    "array-bracket-spacing": [true, "never"],
-    "block-spacing": [true, "always"],
-    "brace-style": [true, "1tbs"],
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
-    "eofline": true,
-    "ter-indent": [true, 2],
-    "linebreak-style": [true, "LF"],
-    "ter-max-len": [true, 120],
-    "max-file-line-count": [true, 500],
-    "new-parens": true,
-    "no-bitwise": true,
-    "indent": [true, "spaces"],
-    "no-consecutive-blank-lines": [true, 2],
-    "no-trailing-whitespace": true,
-    "object-curly-spacing": [true, "never"],
-    "one-variable-per-declaration": true,
-    "object-literal-key-quotes": [true, "as-needed"],
-    "quotemark": [true, "single", "avoid-escape"],
-    "semicolon": [true, "always"],
-    "ordered-imports": false,
-    "space-in-parens": [true, "never"],
-    "comment-format": [true, "check-space"],
-    // ECMAScript 6
+	"array-bracket-spacing": [
+	  true,
+	  "never"
+	],
+	"block-spacing": [
+	  true,
+	  "always"
+	],
+	"brace-style": [
+	  true,
+	  "1tbs"
+	],
+	"variable-name": [
+	  true,
+	  "ban-keywords",
+	  "check-format",
+	  "allow-leading-underscore"
+	],
+	"eofline": true,
+	"ter-indent": [
+	  false,
+	  2
+	],
+	"linebreak-style": [
+	  true,
+	  "LF"
+	],
+	"ter-max-len": [
+	  true,
+	  120
+	],
+	"max-file-line-count": [
+	  true,
+	  500
+	],
+	"new-parens": true,
+	"no-bitwise": true,
+	"indent": [
+	  true,
+	  "tabs"
+	],
+	"no-consecutive-blank-lines": [
+	  true,
+	  2
+	],
+	"no-trailing-whitespace": true,
+	"object-curly-spacing": [
+	  true,
+	  "never"
+	],
+	"one-variable-per-declaration": true,
+	"object-literal-key-quotes": [
+	  true,
+	  "as-needed"
+	],
+	"quotemark": [
+	  true,
+	  "single",
+	  "avoid-escape"
+	],
+	"semicolon": [
+	  true,
+	  "never"
+	],
+	"ordered-imports": false,
+	"space-in-parens": [
+	  true,
+	  "never"
+	],
+	"comment-format": [
+	  true,
+	  "check-space"
+	],
+	// ECMAScript 6
 
-    "ter-arrow-body-style": [true, "as-needed"],
-    "ter-arrow-parens": [true, "always"],
-    "ter-arrow-spacing": [true],
-    "no-var-keyword": true,
-    "object-literal-shorthand": true,
+	"ter-arrow-body-style": [
+	  true,
+	  "as-needed"
+	],
+	"ter-arrow-parens": [
+	  true,
+	  "always"
+	],
+	"ter-arrow-spacing": [
+	  true
+	],
+	"no-var-keyword": true,
+	"object-literal-shorthand": true,
     "ter-prefer-arrow-callback": [
       true
     ],

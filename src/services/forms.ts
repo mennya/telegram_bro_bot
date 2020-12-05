@@ -1,17 +1,17 @@
 class FormsService {
-  private formsList = {};
+	private formsList = {}
 
-  public register(form) {
-    this.formsList[form.chatId] = form;
-  }
+	public register(form) {
+		this.formsList[form.chatId] = form
+	}
 
-  public unRegister(form) {
-    delete this.formsList[form.chatId];
-  }
+	public unRegister(form) {
+		delete this.formsList[form.chatId]
+	}
 
-  public getForms() {
-    return this.formsList;
-  }
+	public getForms() {
+		return this.formsList
+	}
 }
 
-export const formsSrv = new FormsService();
+export const formsSrv = new FormsService()
